@@ -1,0 +1,30 @@
+server:
+  port: 8092
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8091/eureka
+  instance:
+    hostname: localhost
+spring:
+  application:
+    name: gatewayserver
+  cloud:
+    gateway:
+      routes:
+        - id: CLIENTE
+          uri: http://localhost:8081
+          predicates:
+            - Path=/cliente/**
+        - id: CUENTA
+          uri: http://localhost:8082
+          predicates:
+            - Path=/cuenta/**
+        - id: TARJETA
+          uri: http://localhost:8083
+          predicates:
+            - Path=/tarjeta/**
+        - id: OPERACION
+          uri: http://localhost:8084
+          predicates:
+            - Path=/operacion/**
